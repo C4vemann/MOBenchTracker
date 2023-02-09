@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<style>
+			*{
+				margin:0;
+				padding:0;
+			}
+			body{
+				display:flex;
+				flex-direction: column;
+				align-items:center;
+				align-content:center;
+			}
+			#wrapper{
+				display:flex;
+				flex-direction:row;
+				justify-content:space-evenly;
+				padding:10px 0;
+				margin:10px 0;
+				background:lightgrey;
+				width:100%;
+			}
+			.wrapper2{
+				width:100%;
+				display:flex;
+				flex-direction:column;
+				justify-content:center;
+				align-items:center;
+				align-self:flex-start;
+			}
+			button{
+				cursor:pointer;
+				display:flex;
+				justify-content:center;
+				align-items:center;
+				width:100%;
+			}
+
+		</style>
+	</head>
+	<body>
+		<input id="input" type="text" placeholder="Place MOs here">
+		<div id="wrapper">
+			<div class="wrapper2">
+				<button data-bench="A">A</button> 
+				<div data-bench-body="A">
+				</div>
+			</div>
+			<div class="wrapper2">
+				<button data-bench="B">B</button>
+				<div data-bench-body="B">
+				</div>
+			</div>
+			<div class="wrapper2">
+				<button data-bench="C">C</button>
+				<div data-bench-body="C">
+				</div>
+			</div>
+			<div class="wrapper2"> 
+				<button data-bench="D">D</button>
+				<div data-bench-body="D">
+				</div>
+			</div>
+			<div class="wrapper2">
+				<button data-bench="E">E</button> 
+				<div data-bench-body="E">
+				</div>
+			</div>
+			<div class="wrapper2">
+				<button data-bench="F">F</button> 
+				<div data-bench-body="F">
+				</div>
+			</div>
+			<div class="wrapper2">
+				<button data-bench="G">G</button>
+				<div data-bench-body="G">
+				</div>
+			</div>
+		</div>
+		<script>
+			let index = "";
+			let input = document.querySelector("#input");
+			let buttons = document.querySelectorAll("[data-bench]");
+			let bodys = document.querySelectorAll("[data-bench-body]");
+			
+			for(let button of buttons){
+				button.addEventListener("click", () => {
+					change(button);
+				});
+			}
+	
+			input.addEventListener("keydown",()=>{
+				if(event.key === "Enter"){
+					for(let i = 0; i < bodys.length; i++){
+						if(bodys[i].dataset.benchBody == index){
+							let p = document.createElement("p");
+							p.innerText = input.value;
+							bodys[i].append(p);
+						}
+					}
+					console.log(this);
+				}
+			});
+			
+			function change(x){
+				if(x.dataset.bench == index) return;
+				if(index != ""){
+					for(let i = 0; i < buttons.length; i++){
+						if(buttons[i].dataset.bench == index){
+							buttons[i].style.background = "white";
+							break;
+						}
+					}
+				}
+				index = x.dataset.bench;
+				console.log("change index to: " + index);
+				x.style.background = "yellow";
+			}
+
+		</script>
+	</body>
+</html>
