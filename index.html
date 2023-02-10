@@ -92,6 +92,9 @@
 	
 			input.addEventListener("keydown",()=>{
 				if(event.key === "Enter"){
+					if(input.value.search(/\D/)){
+						console.log("true");
+					}
 					for(let i = 0; i < bodys.length; i++){
 						if(bodys[i].dataset.benchBody == index){
 							let p = document.createElement("p");
@@ -99,7 +102,6 @@
 							bodys[i].append(p);
 						}
 					}
-					console.log(this);
 				}
 			});
 			
