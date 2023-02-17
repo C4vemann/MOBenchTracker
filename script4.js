@@ -1,4 +1,4 @@
-function DoublyLinkedList(){
+function LinkedList(){
 	let root;
 	let pointer;
 	let length;
@@ -49,14 +49,18 @@ function DoublyLinkedList(){
 	//returns true if node was successfully inserted
 	function push(id){
 		if(id === null | id === undefined) return false;
+
 		if(root === null){
 			root = Node(id);
 			pointer = root;
 		} else {
+			if(pointer.getNext() != null) traverse();
 			pointer.setNext(Node(id));
 			pointer = pointer.getNext();
 		}
+
 		length = length + 1;
+
 		return true;
 	}
 
@@ -70,20 +74,37 @@ function DoublyLinkedList(){
 		if(length === 0) return false;
 
 		pointer = root;
-
-		if(pointer.getId() === id) root = pointer.getNext();
-		pointer.getNext();
-
-		if(pointer.getId() === id) pointer.setNext(pointer.getNext());
-
-		while(true){
-			if(!pointer.getName() == id) continue;
-			else{
-				console.log(pointer.getName());
-				break;
-			}
-
+		
+		if(pointer.getId() === id){
+			root = pointer.getNext();
+			length--;
+			return true;
 		}
+
+		
+		do{
+			if(pointer.getNext().getId() === id){
+				pointer.setNext(pointer.getNext().getNext());
+				length--;
+				return true;
+			}
+		}while((pointer = pointer.getNext()) != null);
+
+
+	}
+	function traverse(){
+		let count = 0;
+
+		pointer = root;
+
+		//lands on the last element
+		while(pointer.getNext() != null){
+			console.log(pointer.getId());
+			pointer = pointer.getNext();
+			count++;
+		}
+
+		return pointer.getId();
 	}
 
 	//finds a node based on its id
@@ -98,14 +119,16 @@ function DoublyLinkedList(){
 
 		pointer = root;
 
-		let i;
-		for(i = 0; i < length; i++){
+		let count = 0;
+		
+		while(true){
 			if(pointer.getId() === id) break;
 			pointer = pointer.getNext();
 		}
 
-		if(i === length) return false;
-		return i;
+		if(count === length) return false;
+
+		return count;
 	}
 
 
@@ -141,5 +164,6 @@ function DoublyLinkedList(){
 		getRoot,
 		getPointer,
 		getLength,
+		traverse
 	}
 }
