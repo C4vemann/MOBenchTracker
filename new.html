@@ -2,19 +2,39 @@
 <html>
 	<head>
 		<style>
+			*{
+				padding:0;
+				margin:0;
+			}
+			.MyClass{
+				width:fit-content;
+				height:auto;
+				background:lightblue;
+			}
+			.MyClass2{
+				width:100px;
+				height: 100px;
+				background:red;
+			}
 		</style>
 	</head>
 	<body>
-		<!-- <script src="./script.js"></script> -->
-		<!-- <script src="./script2.js"></script> -->
-		<!-- <script src="./script3.js"></script> -->
-		<script src="./script4.js"></script>
+		<script src="./LinkedList.js"></script>
 		<script src="./tools.js"></script>
 		<script>
-			/*let x = MyMainMap();
 			let body = document.getElementsByTagName("body")[0];
+			let benches = LinkedList("MyClass");
+			benches.push("A", LinkedList("MyClass2"));
+			benches.push("B", LinkedList("MyClass2"));
+			benches.push("C", LinkedList("MyClass2"));
+			benches.push("D", LinkedList("MyClass2"));
+			benches.push("E", LinkedList("MyClass2"));
+			benches.push("F", LinkedList("MyClass2"));
+			benches.push("G", LinkedList("MyClass2"));
+			body.append(benches.getElement());
 
-			body.append(x.getElement());*/
+			console.log(benches.traverse("E").getData().push("5",null));
+
 		</script>
 	</body>
 </html>
