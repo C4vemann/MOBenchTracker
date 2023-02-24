@@ -1,72 +1,66 @@
+let body = document.getElementsByTagName("body")[0];
 let map = new Map();
-map.set("A", new Set([1234,35454,9890]));
-map.set("B", new Set([1234]));
-map.set("C", new Set([134,4545,6839]));
-map.set("D", new Set([12, 58, 20009]));
-map.set("E", new Set([099,343,100,53585,102938]));
-map.set("F", new Set([1]));
-map.set("G", new Set());
+map.set("A", createElement("A"));
+map.set("B", createElement("B"));
+map.set("C", createElement("C"));
+map.set("D", createElement("D"));
+map.set("E", createElement("E"));
+map.set("F", createElement("F"));
+map.set("G", createElement("G"));
 
-let map1 = new Map();
-map1.set("A", new Set([]));
-map1.set("B", new Set([]));
-map1.set("C", new Set([]));
-map1.set("D", new Set([]));
-map1.set("E", new Set([]));
-map1.set("F", new Set([]));
-map1.set("G", new Set([]));
+map.forEach((bench) => {
+	body.append(bench.getElement());
+});
 
-function createElement(){
-	let button = createButton();
+function createElement(x){
+	let list = new Set();
+	let button = createButton(x);
 	let body = createBody();
-	let el = init();
+	let element = init(button,body);
 
 	function init(button,body){
 		let wrapper = document.createElement("div");
-		wrapper.append(button.el,body.el);
+		wrapper.append(button.getElement(),body.getElement());
 		return wrapper;
 	}
 	
-	function getEl(){
-		return el;
+	function add(x){
+		if(list.has(x)){return;}
+		list.add(x);
+		body.getElement().append(createText(x).getElement());
 	}
 
-	return{
-		el
+	function remove(x){
+		if(list.has(x)){
+			list.delete(x);
+		}
 	}
-}
 
-function createButton(){
-	let el = init();
+	function getElement(){
+		return element;
+	}
 
-	function init(){
-		let button = document.createElement("button");
-		button.innerText = "";
+	function getButton(){
 		return button;
 	}
 
-	function getEl(){
-		return el;
-	}
-
-	return {
-		getEl
-	}
-}
-
-function createBody(){
-	let el = init();
-
-	function init(){
-		let body = document.createElement("div");
+	function getBody(){
 		return body;
 	}
 
-	function getEl(){
-		return el;
+	function getSet(){
+		return list;
 	}
-	
+
 	return{
-		getEl
+		getElement,
+		getButton,
+		getBody,
+		getSet,
+		add,
+		remove
 	}
 }
+
+
+
